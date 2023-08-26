@@ -89,19 +89,20 @@ st.markdown(
 with st.sidebar:
 #    st.image(profile_image)
 #    st.subheader("China Patent Examination Guideline (CPEG) AI ChatApp")
-    option = st.sidebar.selectbox("Select the content to Chat:", ("第一部分", "第二部分", "第三部分", "第四部分", "第五部分", "索引", "附件"))
-    if option == "TOC: Table of Contents":
+    option = st.sidebar.selectbox("Select the content to Chat:", ("第一部分：初步审查", "第二部分：实质审查", "第三部分：进入国家阶段的国际申请的审查", "第四部分：复审与无效请求的审查", "第五部分：专利申请及事务处理", "索引", "附录"))
+    if option == "第一部分：初步审查":
         file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.PartI.pdf")
-    elif option == "Part I: Preliminary Examination":
+    elif option == "第二部分：实质审查":
         file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.PartII.pdf")
-    elif option == "Part II: Substantive Examination":
+    elif option == "第三部分：进入国家阶段的国际申请的审查":
         file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.PartIII.pdf")
-    elif option == "Part III: Examination of International Applications Entering the National Phase":
+    elif option == "第四部分：复审与无效请求的审查":
         file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.PartIV.pdf")
-    elif option == "Part IV: Examination of Requests for Reexamination and for Invalidation":
+    elif option == "P第五部分：专利申请及事务处理":
         file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.PartV.pdf")
+    elif option == "索引":        
         file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.Index.pdf")
-    elif option == "Annexes":
+    elif option == "附录":
         file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.Annexes.pdf")
     else:
         st.write("Choose which part to Chat first.")
