@@ -57,10 +57,39 @@ initial_embeddings=""
 db_embeddings = ""
 i_file_path=""
 file_path = ""
+#profile_image = "USinoIP.png"
+wechat_image= "WeChatCode.jpg"
+
+st.sidebar.markdown(
+    """
+    <style>
+    .blue-underline {
+        text-decoration: bold;
+        color: blue;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    """
+    <style>
+        [data-testid=stSidebar] [data-testid=stImage]{
+            text-align: center;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+    </style>
+    """, unsafe_allow_html=True
+)
 
 with st.sidebar:
-    st.subheader("China Patent Examination Guideline (CPEG) AI ChatApp")
-    option = st.sidebar.radio("Select the content to Chat:", ("TOC: Table of Contents", "Part I: Preliminary Examination", "Part II: Substantive Examination", "Part III: Examination of International Applications Entering the National Phase", "Part IV: Examination of Requests for Reexamination and for Invalidation", "Part V: Processing of Patent Applications and Procedural Matters", "Index", "Annexes"))
+#    st.image(profile_image)
+#    st.subheader("China Patent Examination Guideline (CPEG) AI ChatApp")
+    option = st.sidebar.selectbox("Select the content to Chat:", ("TOC: Table of Contents", "Part I: Preliminary Examination", "Part II: Substantive Examination", "Part III: Examination of International Applications Entering the National Phase", "Part IV: Examination of Requests for Reexamination and for Invalidation", "Part V: Processing of Patent Applications and Procedural Matters", "Index", "Annexes"))
     if option == "TOC: Table of Contents":
         file_path = os.path.join(os.getcwd(), "CPEGFullV2010ENContents.pdf")
     elif option == "Part I: Preliminary Examination":
@@ -82,7 +111,13 @@ with st.sidebar:
         st.stop()
     st.write("Caution: This app is built based on the English Version of CPEG (2010). For most recent version, please refer to the CNIPA official source.")
     st.write("Disclaimer: This app is for information purpose only. NO liability could be claimed against whoever associated with this app in any manner. User should consult a qualified legal professional for legal advice.")
-    st.subheader("Enjoy Chatting!")      
+    st.subheader("Enjoy Chatting!")
+    st.sidebar.markdown("Contact: [binqiang.liu@foxmail.com](mailto:binqiang.liu@foxmail.com)")
+    st.sidebar.markdown('WeChat: <span class="blue-underline">pat2win</span>, or scan the code below.', unsafe_allow_html=True)
+#    st.sidebar.image(wechat_image, caption='', use_column_width=True)
+#    st.image(wechat_image, caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
+    st.image(wechat_image)
+    st.sidebar.markdown('<span class="blue-underline">Life Enhancing with AI.</span>', unsafe_allow_html=True)      
     try:        
         with st.spinner("Preparing materials for you..."):
             doc_reader = PdfReader(file_path)
