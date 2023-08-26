@@ -57,7 +57,6 @@ initial_embeddings=""
 db_embeddings = ""
 i_file_path=""
 file_path = ""
-#profile_image = "USinoIP.png"
 wechat_image= "WeChatCode.jpg"
 
 st.sidebar.markdown(
@@ -87,8 +86,6 @@ st.markdown(
 )
 
 with st.sidebar:
-#    st.image(profile_image)
-#    st.subheader("China Patent Examination Guideline (CPEG) AI ChatApp")
     option = st.sidebar.selectbox("Select the content to Chat:", ("第一部分：初步审查", "第二部分：实质审查", "第三部分：进入国家阶段的国际申请的审查", "第四部分：复审与无效请求的审查", "第五部分：专利申请及事务处理", "索引", "附录"))
     if option == "第一部分：初步审查":
         file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.PartI.pdf")
@@ -112,8 +109,6 @@ with st.sidebar:
     st.subheader("Enjoy Chatting!")
     st.sidebar.markdown("Contact: [binqiang.liu@foxmail.com](mailto:binqiang.liu@foxmail.com)")
     st.sidebar.markdown('WeChat: <span class="blue-underline">pat2win</span>, or scan the code below.', unsafe_allow_html=True)
-#    st.sidebar.image(wechat_image, caption='', use_column_width=True)
-#    st.image(wechat_image, caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto")
     st.image(wechat_image)
     st.sidebar.markdown('<span class="blue-underline">Life Enhancing with AI.</span>', unsafe_allow_html=True)      
     try:        
