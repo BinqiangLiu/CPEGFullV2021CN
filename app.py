@@ -89,23 +89,20 @@ st.markdown(
 with st.sidebar:
 #    st.image(profile_image)
 #    st.subheader("China Patent Examination Guideline (CPEG) AI ChatApp")
-    option = st.sidebar.selectbox("Select the content to Chat:", ("TOC: Table of Contents", "Part I: Preliminary Examination", "Part II: Substantive Examination", "Part III: Examination of International Applications Entering the National Phase", "Part IV: Examination of Requests for Reexamination and for Invalidation", "Part V: Processing of Patent Applications and Procedural Matters", "Index", "Annexes"))
+    option = st.sidebar.selectbox("Select the content to Chat:", ("第一部分", "第二部分", "第三部分", "第四部分", "第五部分", "索引", "附件"))
     if option == "TOC: Table of Contents":
-        file_path = os.path.join(os.getcwd(), "CPEGFullV2010ENContents.pdf")
+        file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.PartI.pdf")
     elif option == "Part I: Preliminary Examination":
-        file_path = os.path.join(os.getcwd(), "CPEGFullV2010ENPartI.pdf")
+        file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.PartII.pdf")
     elif option == "Part II: Substantive Examination":
-        file_path = os.path.join(os.getcwd(), "CPEGFullV2010ENPartII.pdf")
+        file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.PartIII.pdf")
     elif option == "Part III: Examination of International Applications Entering the National Phase":
-        file_path = os.path.join(os.getcwd(), "CPEGFullV2010ENPartIII.pdf")
+        file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.PartIV.pdf")
     elif option == "Part IV: Examination of Requests for Reexamination and for Invalidation":
-        file_path = os.path.join(os.getcwd(), "CPEGFullV2010ENPartIV.pdf")
-    elif option == "Part V: Processing of Patent Applications and Procedural Matters":
-        file_path = os.path.join(os.getcwd(), "CPEGFullV2010ENPartV.pdf")
-    elif option == "Index":
-        file_path = os.path.join(os.getcwd(), "CPEGFullV2010ENIndex.pdf")
+        file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.PartV.pdf")
+        file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.Index.pdf")
     elif option == "Annexes":
-        file_path = os.path.join(os.getcwd(), "CPEGFullV2010ENAnnexes.pdf")
+        file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.Annexes.pdf")
     else:
         st.write("Choose which part to Chat first.")
         st.stop()
