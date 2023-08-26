@@ -104,7 +104,7 @@ with st.sidebar:
     else:
         st.write("Choose which part to Chat first.")
         st.stop()
-    st.write("Caution: This app is built based on the Chinese Version of CPEG (2021). To keep track of the most recent development, please refer to the CNIPA official source.")
+    st.write("Caution: This app is built based on the Chinese Version of CPEG (2021) sourced on internet. To keep track of the most recent development, please refer to the CNIPA official source.")
     st.write("Disclaimer: This app is for information purpose only. NO liability could be claimed against whoever associated with this app in any manner. User should consult a qualified legal professional for legal advice.")
     st.subheader("Enjoy Chatting!")
     st.sidebar.markdown("Contact: [binqiang.liu@foxmail.com](mailto:binqiang.liu@foxmail.com)")
