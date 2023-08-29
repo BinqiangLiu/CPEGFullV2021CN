@@ -95,7 +95,7 @@ with st.sidebar:
         file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.PartIII.pdf")
     elif option == "第四部分：复审与无效请求的审查":
         file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.PartIV.pdf")
-    elif option == "P第五部分：专利申请及事务处理":
+    elif option == "第五部分：专利申请及事务处理":
         file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.PartV.pdf")
     elif option == "索引":        
         file_path = os.path.join(os.getcwd(), "HLZY.CPEG.V2021.Index.pdf")
