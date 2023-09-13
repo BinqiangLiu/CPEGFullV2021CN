@@ -149,7 +149,7 @@ else:
 
 display_output_text = st.checkbox("Check AI Repsonse", key="key_checkbox", help="Check the Checkbox to get AI Response.") 
      
-if display_output_text:
+if display_output_text=True:
   with st.spinner("Preparing materials for you..."):  
     initial_embeddings=get_embeddings(texts)
     db_embeddings = torch.FloatTensor(initial_embeddings) 
