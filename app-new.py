@@ -156,7 +156,7 @@ if display_output_text:
     q_embedding=get_embeddings(user_question)
     final_q_embedding = torch.FloatTensor(q_embedding)
     hits = semantic_search(final_q_embedding, db_embeddings, top_k=5)
-    display_output_text = st.checkbox("Check AI Response", key="key_checkbox", value=False)      
+    display_output_text = False    
 else:
     print("Check the Checkbox to get AI Response.")
     st.write("Check the Checkbox to get AI Response.")      
