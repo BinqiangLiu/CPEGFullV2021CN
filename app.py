@@ -170,15 +170,8 @@ for i in range(len(hits[0])):
     page_content = texts[hits[0][i]['corpus_id']]
     page_contents.append(page_content)
 
-print(page_contents)
-print()
 temp_page_contents=str(page_contents)
-print()
 final_page_contents = temp_page_contents.replace('\\n', '') 
-print(final_page_contents)
-print()
-print("AI Thinking...Please wait a while to Cheers!")
-print()
 
 random_string = generate_random_string(10)
 
