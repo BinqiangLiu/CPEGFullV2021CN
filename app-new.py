@@ -116,23 +116,22 @@ with st.sidebar:
     st.sidebar.markdown('WeChat: <span class="blue-underline">pat2win</span>, or scan the code below.', unsafe_allow_html=True)
     st.image(wechat_image)
     st.sidebar.markdown('<span class="blue-underline">Life Enhancing with AI.</span>', unsafe_allow_html=True)      
-    try:        
-        with st.spinner("Preparing materials for you..."):
-            doc_reader = PdfReader(file_path)
-            raw_text = ''
-            for i, page in enumerate(doc_reader.pages):
-                text = page.extract_text()
-                if text:
-                    raw_text += text
-#            text_splitter = RecursiveCharacterTextSplitter(        
-            text_splitter = CharacterTextSplitter(        
-                separator = "\n",
-                chunk_size = 1000,
-                chunk_overlap  = 200, #striding over the text
-                length_function = len,
-            )
-            temp_texts = text_splitter.split_text(raw_text)
-            texts = temp_texts
+    try:   
+        doc_reader = PdfReader(file_path)
+        raw_text = ''
+        for i, page in enumerate(doc_reader.pages):
+            text = page.extract_text()
+            if text:
+                raw_text += text
+#        text_splitter = RecursiveCharacterTextSplitter(        
+        text_splitter = CharacterTextSplitter(        
+            separator = "\n",
+            chunk_size = 1000,
+            chunk_overlap  = 200, #striding over the text
+            length_function = len,
+        )
+        temp_texts = text_splitter.split_text(raw_text)
+        texts = temp_texts
     except Exception as e:
         st.write("Unknow error.")
         print("Unknow error.")
@@ -148,8 +147,10 @@ else:
     print("Please enter your question first.")
     st.stop()
 
-display_output_text = st.checkbox("Check AI Repsonse", key="key_checkbox") 
+display_output_text = st.checkbox("Check AI Repsonse", key="key_checkbox", help="Check the Checkbox to get AI Response.") 
+     
 if display_output_text:
+  with st.spinner("Preparing materials for you..."):  
     initial_embeddings=get_embeddings(texts)
     db_embeddings = torch.FloatTensor(initial_embeddings) 
     q_embedding=get_embeddings(user_question)
