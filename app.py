@@ -161,10 +161,6 @@ else:
     print("Please enter your question first.")
     st.stop()   
 
-for i in range(len(hits[0])):
-    print(texts[hits[0][i]['corpus_id']])
-    print()
-
 page_contents = []
 for i in range(len(hits[0])):
     page_content = texts[hits[0][i]['corpus_id']]
