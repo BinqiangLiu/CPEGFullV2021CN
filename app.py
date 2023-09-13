@@ -135,7 +135,7 @@ with st.sidebar:
         print("Unknow error.")
         st.stop()
 
-user_question = st.text_input("Enter your question & query CPEG (EN):")
+user_question = st.text_input("Enter your question & query CPEG (CN):")
 
 if user_question !="" and not user_question.strip().isspace() and not user_question == "" and not user_question.strip() == "" and not user_question.isspace():       
     #st.write("Your question: "+user_question)
