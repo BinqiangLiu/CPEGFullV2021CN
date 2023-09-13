@@ -6,10 +6,12 @@ from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.document_loaders import TextLoader
 import requests
+from sentence_transformers.util import semantic_search
 from pathlib import Path
 from time import sleep
 import torch
 import os
+import sys
 import random
 import string
 from dotenv import load_dotenv
@@ -58,6 +60,9 @@ db_embeddings = ""
 i_file_path=""
 file_path = ""
 wechat_image= "WeChatCode.jpg"
+q_embedding=""
+final_q_embedding =""
+hits = ""
 
 st.sidebar.markdown(
     """
@@ -111,45 +116,50 @@ with st.sidebar:
     st.sidebar.markdown('WeChat: <span class="blue-underline">pat2win</span>, or scan the code below.', unsafe_allow_html=True)
     st.image(wechat_image)
     st.sidebar.markdown('<span class="blue-underline">Life Enhancing with AI.</span>', unsafe_allow_html=True)      
-    try:        
-        with st.spinner("Preparing materials for you..."):
-            doc_reader = PdfReader(file_path)
-            raw_text = ''
-            for i, page in enumerate(doc_reader.pages):
-                text = page.extract_text()
-                if text:
-                    raw_text += text
-#            text_splitter = RecursiveCharacterTextSplitter(        
-            text_splitter = CharacterTextSplitter(        
-                separator = "\n",
-                chunk_size = 1000,
-                chunk_overlap  = 200, #striding over the text
-                length_function = len,
-            )
-            temp_texts = text_splitter.split_text(raw_text)
-            texts = temp_texts
-            initial_embeddings=get_embeddings(texts)
-            db_embeddings = torch.FloatTensor(initial_embeddings) 
+    try:   
+        doc_reader = PdfReader(file_path)
+        raw_text = ''
+        for i, page in enumerate(doc_reader.pages):
+            text = page.extract_text()
+            if text:
+                raw_text += text
+#        text_splitter = RecursiveCharacterTextSplitter(        
+        text_splitter = CharacterTextSplitter(        
+            separator = "\n",
+            chunk_size = 1000,
+            chunk_overlap  = 200, #striding over the text
+            length_function = len,
+        )
+        temp_texts = text_splitter.split_text(raw_text)
+        texts = temp_texts
     except Exception as e:
         st.write("Unknow error.")
         print("Unknow error.")
         st.stop()
 
 user_question = st.text_input("Enter your question & query CPEG (CN):")
+display_output_text = st.checkbox("Check AI Repsonse", key="key_checkbox", help="Check me to get AI Response.") 
 
-if user_question !="" and not user_question.strip().isspace() and not user_question == "" and not user_question.strip() == "" and not user_question.isspace():       
+if user_question !="" and not user_question.strip().isspace() and not user_question == "" and not user_question.strip() == "" and not user_question.isspace():
+    if display_output_text==True:
+#  with st.spinner("Preparing materials for you..."):  
+        initial_embeddings=get_embeddings(texts)
+        db_embeddings = torch.FloatTensor(initial_embeddings) 
+        q_embedding=get_embeddings(user_question)
+        final_q_embedding = torch.FloatTensor(q_embedding)
+        hits = semantic_search(final_q_embedding, db_embeddings, top_k=5)
+#    display_output_text = False    
+    else:
+        print("Check the Checkbox to get AI Response.")
+#        st.write("Check the Checkbox to get AI Response.")      
+        sys.exit()
+        #st.stop()
     #st.write("Your question: "+user_question)
     print("Your question: "+user_question)
     print()
 else:
     print("Please enter your question first.")
-    st.stop()
-
-q_embedding=get_embeddings(user_question)
-final_q_embedding = torch.FloatTensor(q_embedding)
-
-from sentence_transformers.util import semantic_search
-hits = semantic_search(final_q_embedding, db_embeddings, top_k=5)
+    st.stop()   
 
 for i in range(len(hits[0])):
     print(texts[hits[0][i]['corpus_id']])
@@ -187,5 +197,3 @@ with st.spinner("AI Thinking...Please wait a while to Cheers!"):
     print("Have more questions? Go ahead and continue asking your AI assistant : )")
     st.write("AI Response:")
     st.write(i_final_ai_response)
-#    st.write("---")
-#    st.write("Have more questions? Go ahead and continue asking your AI assistant : )")
