@@ -138,7 +138,7 @@ with st.sidebar:
         st.stop()
 
 user_question = st.text_input("Enter your question & query CPEG (CN):")
-display_output_text = st.checkbox("Check AI Repsonse", key="key_checkbox", help="Check the Checkbox to get AI Response.") 
+display_output_text = st.checkbox("Check AI Repsonse", key="key_checkbox", help="Check me to get AI Response.") 
 
 if user_question !="" and not user_question.strip().isspace() and not user_question == "" and not user_question.strip() == "" and not user_question.isspace():
     if display_output_text==True:
