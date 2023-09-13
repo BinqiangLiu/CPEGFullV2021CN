@@ -138,30 +138,28 @@ with st.sidebar:
         st.stop()
 
 user_question = st.text_input("Enter your question & query CPEG (CN):")
+display_output_text = st.checkbox("Check AI Repsonse", key="key_checkbox", help="Check the Checkbox to get AI Response.") 
 
-if user_question !="" and not user_question.strip().isspace() and not user_question == "" and not user_question.strip() == "" and not user_question.isspace():       
+if user_question !="" and not user_question.strip().isspace() and not user_question == "" and not user_question.strip() == "" and not user_question.isspace():
+    if display_output_text==True:
+#  with st.spinner("Preparing materials for you..."):  
+        initial_embeddings=get_embeddings(texts)
+        db_embeddings = torch.FloatTensor(initial_embeddings) 
+        q_embedding=get_embeddings(user_question)
+        final_q_embedding = torch.FloatTensor(q_embedding)
+        hits = semantic_search(final_q_embedding, db_embeddings, top_k=5)
+#    display_output_text = False    
+    else:
+        print("Check the Checkbox to get AI Response.")
+#        st.write("Check the Checkbox to get AI Response.")      
+        sys.exit()
+        #st.stop()
     #st.write("Your question: "+user_question)
     print("Your question: "+user_question)
     print()
 else:
     print("Please enter your question first.")
-    st.stop()
-
-display_output_text = st.checkbox("Check AI Repsonse", key="key_checkbox", help="Check the Checkbox to get AI Response.") 
-     
-if display_output_text==True:
-  with st.spinner("Preparing materials for you..."):  
-    initial_embeddings=get_embeddings(texts)
-    db_embeddings = torch.FloatTensor(initial_embeddings) 
-    q_embedding=get_embeddings(user_question)
-    final_q_embedding = torch.FloatTensor(q_embedding)
-    hits = semantic_search(final_q_embedding, db_embeddings, top_k=5)
-    display_output_text = False    
-else:
-    print("Check the Checkbox to get AI Response.")
-#    st.write("Check the Checkbox to get AI Response.")      
-    sys.exit()
-    #st.stop()
+    st.stop()   
 
 for i in range(len(hits[0])):
     print(texts[hits[0][i]['corpus_id']])
