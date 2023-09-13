@@ -159,7 +159,7 @@ if display_output_text:
     display_output_text = False    
 else:
     print("Check the Checkbox to get AI Response.")
-    st.write("Check the Checkbox to get AI Response.")      
+#    st.write("Check the Checkbox to get AI Response.")      
     sys.exit()
     #st.stop()
 
