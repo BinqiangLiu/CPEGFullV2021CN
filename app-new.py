@@ -11,6 +11,7 @@ from pathlib import Path
 from time import sleep
 import torch
 import os
+import sys
 import random
 import string
 from dotenv import load_dotenv
@@ -147,22 +148,6 @@ else:
     print("Please enter your question first.")
     st.stop()
 
-display_output_text = st.checkbox("语音播放翻译结果")    
-if display_output_text:
-    if text is None:
-        st.write("请在上方输入框中输入需要翻译的内容")
-        st.stop()
-    else:
-        output_text = text_to_speech(input_language, output_language, text)
-        audio_file = open("translationresult.mp3", "rb")
-        audio_bytes = audio_file.read()
-        st.audio(audio_bytes, format="audio/mp3")
-        st.write(f" {output_text}")
-
-#if st.button("查看翻译结果"):
-#    output_text = text_to_speech(input_language, output_language, text)
-#    st.write(f" {output_text}")
-#    st.write("---")
 display_output_text = st.checkbox("Check AI Repsonse", key="key_checkbox") 
 if display_output_text:
     initial_embeddings=get_embeddings(texts)
