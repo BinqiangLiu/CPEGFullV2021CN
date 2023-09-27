@@ -29,10 +29,10 @@ HUGGINGFACEHUB_API_TOKEN = os.getenv('HUGGINGFACEHUB_API_TOKEN')
 model_id = os.getenv('model_id')
 hf_token = os.getenv('hf_token')
 repo_id = os.getenv('repo_id')
-HUGGINGFACEHUB_API_TOKEN = os.environ.get('HUGGINGFACEHUB_API_TOKEN')
-model_id = os.environ.get('model_id')
-hf_token = os.environ.get('hf_token')
-repo_id = os.environ.get('repo_id')
+#HUGGINGFACEHUB_API_TOKEN = os.environ.get('HUGGINGFACEHUB_API_TOKEN')
+#model_id = os.environ.get('model_id')
+#hf_token = os.environ.get('hf_token')
+#repo_id = os.environ.get('repo_id')
 
 api_url = f"https://api-inference.huggingface.co/pipeline/feature-extraction/{model_id}"
 headers = {"Authorization": f"Bearer {hf_token}"}
@@ -41,12 +41,12 @@ def get_embeddings(input_str_texts):
     response = requests.post(api_url, headers=headers, json={"inputs": input_str_texts, "options":{"wait_for_model":True}})
     return response.json()
 
-llm = HuggingFaceHub(repo_id=repo_id,
-                     model_kwargs={"min_length":100,
-                                   "max_new_tokens":1024, "do_sample":True,
+llm = HuggingFaceHub(repo_id=model,
+                     model_kwargs={"min_length":1024,
+                                   "max_new_tokens":5632, "do_sample":True,
                                    "temperature":0.1,
                                    "top_k":50,
-                                   "top_p":0.95, "eos_token_id":49155})
+                                   "top_p":0.95, "eos_token_id":49155})  
 
 chain = load_qa_chain(llm=llm, chain_type="stuff")
 
@@ -178,11 +178,11 @@ with st.spinner("AI Thinking...Please wait a while to Cheers!"):
     loader = TextLoader(i_file_path, encoding="utf-8")
     loaded_documents = loader.load()
     temp_ai_response=chain.run(input_documents=loaded_documents, question=user_question)
-    final_ai_response=temp_ai_response.partition('<|end|>')[0]
-    ii_final_ai_response=final_ai_response.replace('|system|>', '') 
-    i_final_ai_response = ii_final_ai_response.replace('\n', '')
-    print("AI Response:")
-    print(i_final_ai_response)
+    #final_ai_response=temp_ai_response.partition('<|end|>')[0]
+    #ii_final_ai_response=final_ai_response.replace('|system|>', '') 
+    #i_final_ai_response = ii_final_ai_response.replace('\n', '')
+    #print("AI Response:")
+    #print(i_final_ai_response)
     print("Have more questions? Go ahead and continue asking your AI assistant : )")
     st.write("AI Response:")
-    st.write(i_final_ai_response)
+    st.write(temp_ai_response)
