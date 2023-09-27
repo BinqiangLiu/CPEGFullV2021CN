@@ -41,7 +41,7 @@ def get_embeddings(input_str_texts):
     response = requests.post(api_url, headers=headers, json={"inputs": input_str_texts, "options":{"wait_for_model":True}})
     return response.json()
 
-llm = HuggingFaceHub(repo_id=model,
+llm = HuggingFaceHub(repo_id=repo_id,
                      model_kwargs={"min_length":1024,
                                    "max_new_tokens":5632, "do_sample":True,
                                    "temperature":0.1,
