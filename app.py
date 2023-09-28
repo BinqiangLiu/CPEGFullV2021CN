@@ -47,7 +47,8 @@ llm = HuggingFaceHub(repo_id=repo_id,
                                    "do_sample":True,
                                    "temperature":0.1,
                                    "top_k":50,
-                                   "top_p":0.95, "eos_token_id":49155})  
+                                   "top_p":0.95,
+                                   "eos_token_id":49155})  
 
 chain = load_qa_chain(llm=llm, chain_type="stuff")
 
