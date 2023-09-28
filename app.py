@@ -43,7 +43,8 @@ def get_embeddings(input_str_texts):
 
 llm = HuggingFaceHub(repo_id=repo_id,
                      model_kwargs={"min_length":1024,
-                                   "max_new_tokens":5632, "do_sample":True,
+                                   "max_new_tokens":6145,
+                                   "do_sample":True,
                                    "temperature":0.1,
                                    "top_k":50,
                                    "top_p":0.95, "eos_token_id":49155})  
