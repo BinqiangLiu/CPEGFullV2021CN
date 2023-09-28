@@ -132,6 +132,8 @@ with st.sidebar:
         )
         temp_texts = text_splitter.split_text(raw_text)
         texts = temp_texts
+        initial_embeddings=get_embeddings(texts)
+        db_embeddings = torch.FloatTensor(initial_embeddings) 
     except Exception as e:
         st.write("Unknow error.")
         print("Unknow error.")
@@ -143,8 +145,8 @@ display_output_text = st.checkbox("Check AI Repsonse", key="key_checkbox", help=
 if user_question !="" and not user_question.strip().isspace() and not user_question == "" and not user_question.strip() == "" and not user_question.isspace():
     if display_output_text==True:
 #  with st.spinner("Preparing materials for you..."):  
-        initial_embeddings=get_embeddings(texts)
-        db_embeddings = torch.FloatTensor(initial_embeddings) 
+#        initial_embeddings=get_embeddings(texts)
+#        db_embeddings = torch.FloatTensor(initial_embeddings) 
         q_embedding=get_embeddings(user_question)
         final_q_embedding = torch.FloatTensor(q_embedding)
         hits = semantic_search(final_q_embedding, db_embeddings, top_k=5)
